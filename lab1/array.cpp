@@ -1,0 +1,107 @@
+#include "array.h"
+
+#include <iostream>
+
+Array::Array() {
+    std::cout << "Enter length of array:\t";
+    std::cin >>length;
+    arr = new int[length];
+}
+
+Array::Array(int length) {
+    this->length = length;
+    arr = new int[length];
+}
+
+Array::Array(const Array &other) {
+    length = other.length;
+    arr = new int[length];
+
+    for (int i = 0; i < length; i++) {
+        arr[i] = other.arr[i];
+    }
+}
+
+Array::~Array() {
+    delete[] arr;
+}
+
+void Array::fill() {
+    if (length == 0) {
+        std::cout << "Array is empty" << std::endl;
+        return;
+    }
+
+    std::cout << "Enter " << length << " elements of array:\t";
+    for (int i = 0; i < length; i++) {
+        std::cin >> arr[i];
+    }
+}
+
+void Array::print() {
+    if (length == 0) {
+        std::cout << "Array is empty" << std::endl;
+        return;
+    }
+
+    std::cout << "[ ";
+    for (int i = 0; i < length; i++) {
+        std::cout << arr[i] << " ";
+    }
+    std::cout << "]" << std::endl;
+}
+
+int Array::get_length() {
+    return length;
+}
+
+void Array::set_length(int length) {
+    this->length = length;
+    delete[] arr;
+
+    arr = new int[length];
+}
+
+bool Array::contains(int value) {
+    for (int i = 0; i < length; i++) {
+        if (arr[i] == value) {return true;}
+    }
+
+    return false;
+}
+
+Array Array::get_intersection(Array &a, Array &b) {
+    int size = std::min(a.length, b.length);
+    int* tempArr = new int[size];
+    int resultSize = 0;
+
+    for (int i = 0; i < a.length; i++) {
+        int current = a.arr[i];
+
+        bool isResultContains = false;
+        for (int j = 0; j < resultSize; j++) {
+            if (tempArr[j] == current) {
+                isResultContains = true;
+                break;
+            }
+        }
+
+        if (!isResultContains && b.contains(current)) {
+            tempArr[resultSize++] = current;
+        }
+    }
+
+    Array result(resultSize);
+    for (int i = 0; i < resultSize; i++) {
+        result.arr[i] = tempArr[i];
+    }
+
+    delete[] tempArr;
+
+    return result;
+}
+
+//TODO: implement me!
+static Array get_union(Array& a, Array& b) {
+    return a;
+}
