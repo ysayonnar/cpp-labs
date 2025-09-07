@@ -13,4 +13,8 @@ int main() {
     Array intersection_arr = Array::get_intersection(arr1, arr2);
     std::cout << std::endl << "Intersection:\t";
     intersection_arr.print();
+
+    Array union_arr = Array::get_union(arr1, arr2);
+    std::cout << std::endl << "Union:\t";
+    union_arr.print();
 }

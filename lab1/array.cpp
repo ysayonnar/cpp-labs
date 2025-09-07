@@ -101,7 +101,50 @@ Array Array::get_intersection(Array &a, Array &b) {
     return result;
 }
 
-//TODO: implement me!
-static Array get_union(Array& a, Array& b) {
-    return a;
+Array Array::get_union(Array& a, Array& b) {
+    int size = a.length + b.length;
+    int *tempArr = new int[size];
+    int resultSize = 0;
+
+    for (int i = 0; i < a.length; i++) {
+        int current = a.arr[i];
+
+        bool isResultContains = false;
+        for (int j = 0; j < resultSize; j++) {
+            if (tempArr[j] == current) {
+                isResultContains = true;
+                break;
+            }
+        }
+
+        if (!isResultContains) {
+            tempArr[resultSize++] = current;
+        }
+    }
+
+
+    for (int i = 0; i < b.length; i++) {
+        int current = b.arr[i];
+
+        bool isResultContains = false;
+        for (int j = 0; j < resultSize; j++) {
+            if (tempArr[j] == current) {
+                isResultContains = true;
+                break;
+            }
+        }
+
+        if (!isResultContains) {
+            tempArr[resultSize++] = current;
+        }
+    }
+
+    Array result(resultSize);
+    for (int i = 0; i < resultSize; i++) {
+        result.arr[i] = tempArr[i];
+    }
+
+    delete[] tempArr;
+
+    return result;
 }
