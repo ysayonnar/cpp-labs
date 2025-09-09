@@ -2,12 +2,6 @@
 
 #include <iostream>
 
-Array::Array() {
-    std::cout << "Enter length of array:\t";
-    std::cin >>length;
-    arr = new int[length];
-}
-
 Array::Array(int length) {
     this->length = length;
     arr = new int[length];

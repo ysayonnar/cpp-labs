@@ -7,7 +7,6 @@ private:
     int length;
 
 public:
-    Array();
     Array(int length);
 
     Array(const Array &other);

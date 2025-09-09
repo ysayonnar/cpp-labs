@@ -6,11 +6,21 @@ int main() {
 
     while (isContinue) {
         std::cout << "Creating first array..." << std::endl;
-        Array arr1;
+
+        int length1;
+        std::cout << "Enter length:\t";
+        std::cin >> length1;
+
+        Array arr1(length1);
         arr1.fill();
 
         std::cout << std::endl << "Creating second array..." << std::endl;
-        Array arr2;
+
+        int length2;
+        std::cout << "Enter length:\t";
+        std::cin >> length2;
+
+        Array arr2(length2);
         arr2.fill();
 
         Array intersection_arr = Array::get_intersection(arr1, arr2);
