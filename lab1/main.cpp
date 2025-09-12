@@ -1,6 +1,17 @@
 #include <iostream>
 #include "array.h"
 
+void print_menu() {
+    std::cout << "=~=~=~= OPTIONS =~=~=~=" << std::endl;
+    std::cout << "1. Fill first array" << std::endl;
+    std::cout << "2. Fill second array" << std::endl;
+    std::cout << "3. Get intersection" << std::endl;
+    std::cout << "4. Get union" << std::endl;
+    std::cout << "5. Print first array" << std::endl;
+    std::cout << "6. Print second array" << std::endl;
+    std::cout << "0. EXIT" << std::endl << std::endl;
+}
+
 int main() {
     int option = 1;
 
@@ -8,15 +19,7 @@ int main() {
     Array *arr2 = nullptr;
 
     while (option != 0) {
-        std::cout << "=~=~=~= OPTIONS =~=~=~=" << std::endl;
-        std::cout << "1. Fill first array" << std::endl;
-        std::cout << "2. Fill second array" << std::endl;
-        std::cout << "3. Get intersection" << std::endl;
-        std::cout << "4. Get union" << std::endl;
-        std::cout << "5. Print first array" << std::endl;
-        std::cout << "6. Print second array" << std::endl;
-        std::cout << "0. EXIT" << std::endl << std::endl;
-
+        print_menu();
         std::cout << "OPTION:\t";
         std::cin >> option;
 

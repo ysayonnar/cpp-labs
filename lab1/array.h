@@ -2,7 +2,6 @@
 #define ARRAY_H
 
 class Array {
-private:
     int *arr;
     int length;
 
