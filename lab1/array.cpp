@@ -2,6 +2,11 @@
 
 #include <iostream>
 
+Array::Array() {
+    length = 0;
+    arr = nullptr;
+}
+
 Array::Array(int length) {
     this->length = length;
     arr = new int[length];
@@ -14,6 +19,23 @@ Array::Array(const Array &other) {
     for (int i = 0; i < length; i++) {
         arr[i] = other.arr[i];
     }
+}
+
+Array &Array::operator=(const Array &other) {
+    if (this == &other) {
+        return *this;
+    }
+
+    delete[] arr;
+
+    length = other.length;
+    arr = new int[length];
+
+    for (int i = 0; i < length; i++) {
+        arr[i] = other.arr[i];
+    }
+
+    return *this;
 }
 
 Array::~Array() { delete[] arr; }

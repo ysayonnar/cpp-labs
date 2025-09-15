@@ -6,10 +6,10 @@ class Array {
     int length;
 
   public:
+    Array();
     Array(int length);
-
     Array(const Array &other);
-
+    Array &operator=(const Array &other);
     ~Array();
 
     void fill();
