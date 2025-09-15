@@ -25,7 +25,6 @@ String::~String() {
     delete[] data;
 }
 
-
 void String::allocate(unsigned int new_size) {
     delete[] data;
     data = new char[new_size];

@@ -5,7 +5,7 @@ class Array {
     int *arr;
     int length;
 
-public:
+  public:
     Array(int length);
 
     Array(const Array &other);
@@ -16,11 +16,15 @@ public:
     void print();
     int get_length();
     void set_length(int length);
+    void sort();
 
     bool contains(int value);
 
-    static Array get_intersection(Array& a, Array& b);
-    static Array get_union(Array& a, Array& b);
+    static Array get_intersection(Array &a, Array &b);
+    static Array get_union(Array &a, Array &b);
+
+  private:
+    void quick_sort(int low, int high);
 };
 
 #endif

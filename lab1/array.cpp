@@ -56,9 +56,37 @@ void Array::set_length(int length) {
     arr = new int[length];
 }
 
+void Array::quick_sort(int low, int high) {
+    if (low < high) {
+        int pivot = arr[high];
+        int i = low - 1;
+
+        for (int j = low; j < high; j++) {
+            if (arr[j] <= pivot) {
+                i++;
+                std::swap(arr[i], arr[j]);
+            }
+        }
+        std::swap(arr[i + 1], arr[high]);
+        int pi = i + 1;
+
+        quick_sort(low, pi - 1);
+        quick_sort(pi + 1, high);
+    }
+}
+
+void Array::sort() {
+    if (arr == nullptr || length <= 1) {
+        return;
+    }
+    quick_sort(0, length - 1);
+}
+
 bool Array::contains(int value) {
     for (int i = 0; i < length; i++) {
-        if (arr[i] == value) {return true;}
+        if (arr[i] == value) {
+            return true;
+        }
     }
 
     return false;
@@ -66,7 +94,7 @@ bool Array::contains(int value) {
 
 Array Array::get_intersection(Array &a, Array &b) {
     int size = std::min(a.length, b.length);
-    int* tempArr = new int[size];
+    int *tempArr = new int[size];
     int resultSize = 0;
 
     for (int i = 0; i < a.length; i++) {
@@ -95,7 +123,7 @@ Array Array::get_intersection(Array &a, Array &b) {
     return result;
 }
 
-Array Array::get_union(Array& a, Array& b) {
+Array Array::get_union(Array &a, Array &b) {
     int size = a.length + b.length;
     int *tempArr = new int[size];
     int resultSize = 0;
@@ -115,7 +143,6 @@ Array Array::get_union(Array& a, Array& b) {
             tempArr[resultSize++] = current;
         }
     }
-
 
     for (int i = 0; i < b.length; i++) {
         int current = b.arr[i];
