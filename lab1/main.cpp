@@ -96,13 +96,21 @@ int main() {
             break;
         }
         case 7: {
+            if (arr1 == nullptr) {
+                std::cout << "First array is empty" << std::endl;
+                break;
+            }
             arr1->sort();
             std::cout << "First array sorted!" << std::endl;
             break;
         }
         case 8: {
+            if (arr2 == nullptr) {
+                std::cout << "Second array is empty" << std::endl;
+                break;
+            }
             arr2->sort();
-            std::cout << "Secons array sorted!" << std::endl;
+            std::cout << "Second array sorted!" << std::endl;
             break;
         }
         case 0: {
