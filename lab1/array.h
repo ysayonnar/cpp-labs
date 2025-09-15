@@ -17,11 +17,12 @@ class Array {
     int get_length();
     void set_length(int length);
     void sort();
+    bool isEmpty();
 
     bool contains(int value);
 
-    static Array get_intersection(Array &a, Array &b);
-    static Array get_union(Array &a, Array &b);
+    Array get_intersection(Array &b);
+    Array get_union(Array &b);
 
   private:
     void quick_sort(int low, int high);

@@ -11,13 +11,13 @@ void print_menu() {
     std::cout << "6. Print second array" << std::endl;
     std::cout << "7. Sort first array" << std::endl;
     std::cout << "8. Sort second array" << std::endl;
-    std::cout << "0. EXIT" << std::endl
-              << std::endl;
+    std::cout << "0. EXIT" << std::endl << std::endl;
 }
 
 int main() {
     int option = 1;
 
+    // TODO: убрать указатели
     Array *arr1 = nullptr;
     Array *arr2 = nullptr;
 
@@ -56,9 +56,8 @@ int main() {
                 std::cout << "One of arrays is empty" << std::endl;
                 break;
             }
-            Array intersection_arr = Array::get_intersection(*arr1, *arr2);
-            std::cout << std::endl
-                      << "Intersection:\t";
+            Array intersection_arr = arr1->get_intersection(*arr2);
+            std::cout << std::endl << "Intersection:\t";
             intersection_arr.print();
             break;
         }
@@ -67,30 +66,25 @@ int main() {
                 std::cout << "One of arrays is empty" << std::endl;
                 break;
             }
-            Array union_arr = Array::get_union(*arr1, *arr2);
-            std::cout << std::endl
-                      << "Union:\t";
+            Array union_arr = arr1->get_union(*arr2);
+            std::cout << std::endl << "Union:\t";
             union_arr.print();
             break;
         }
         case 5: {
             if (arr1 == nullptr) {
-                std::cout << std::endl
-                          << "Empty array!" << std::endl;
+                std::cout << std::endl << "Empty array!" << std::endl;
             } else {
-                std::cout << std::endl
-                          << "Array:\t";
+                std::cout << std::endl << "Array:\t";
                 arr1->print();
             }
             break;
         }
         case 6: {
             if (arr2 == nullptr) {
-                std::cout << std::endl
-                          << "Empty array!" << std::endl;
+                std::cout << std::endl << "Empty array!" << std::endl;
             } else {
-                std::cout << std::endl
-                          << "Array:\t";
+                std::cout << std::endl << "Array:\t";
                 arr2->print();
             }
             break;

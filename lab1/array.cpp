@@ -16,9 +16,7 @@ Array::Array(const Array &other) {
     }
 }
 
-Array::~Array() {
-    delete[] arr;
-}
+Array::~Array() { delete[] arr; }
 
 void Array::fill() {
     if (length == 0) {
@@ -45,9 +43,7 @@ void Array::print() {
     std::cout << "]" << std::endl;
 }
 
-int Array::get_length() {
-    return length;
-}
+int Array::get_length() { return length; }
 
 void Array::set_length(int length) {
     this->length = length;
@@ -75,6 +71,8 @@ void Array::quick_sort(int low, int high) {
     }
 }
 
+bool Array::isEmpty() { return (arr == nullptr || length == 0); }
+
 void Array::sort() {
     if (arr == nullptr || length <= 1) {
         return;
@@ -92,55 +90,53 @@ bool Array::contains(int value) {
     return false;
 }
 
-Array Array::get_intersection(Array &a, Array &b) {
-    int size = std::min(a.length, b.length);
-    int *tempArr = new int[size];
+Array Array::get_intersection(Array &b) {
+    int size = std::min(this->length, b.length);
+    Array temp(size);
     int resultSize = 0;
 
-    for (int i = 0; i < a.length; i++) {
-        int current = a.arr[i];
+    for (int i = 0; i < this->length; i++) {
+        int current = this->arr[i];
 
         bool isResultContains = false;
         for (int j = 0; j < resultSize; j++) {
-            if (tempArr[j] == current) {
+            if (temp.arr[j] == current) {
                 isResultContains = true;
                 break;
             }
         }
 
         if (!isResultContains && b.contains(current)) {
-            tempArr[resultSize++] = current;
+            temp.arr[resultSize++] = current;
         }
     }
 
     Array result(resultSize);
     for (int i = 0; i < resultSize; i++) {
-        result.arr[i] = tempArr[i];
+        result.arr[i] = temp.arr[i];
     }
-
-    delete[] tempArr;
 
     return result;
 }
 
-Array Array::get_union(Array &a, Array &b) {
-    int size = a.length + b.length;
-    int *tempArr = new int[size];
+Array Array::get_union(Array &b) {
+    int size = this->length + b.length;
+    Array temp(size);
     int resultSize = 0;
 
-    for (int i = 0; i < a.length; i++) {
-        int current = a.arr[i];
+    for (int i = 0; i < this->length; i++) {
+        int current = this->arr[i];
 
         bool isResultContains = false;
         for (int j = 0; j < resultSize; j++) {
-            if (tempArr[j] == current) {
+            if (temp.arr[j] == current) {
                 isResultContains = true;
                 break;
             }
         }
 
         if (!isResultContains) {
-            tempArr[resultSize++] = current;
+            temp.arr[resultSize++] = current;
         }
     }
 
@@ -149,23 +145,21 @@ Array Array::get_union(Array &a, Array &b) {
 
         bool isResultContains = false;
         for (int j = 0; j < resultSize; j++) {
-            if (tempArr[j] == current) {
+            if (temp.arr[j] == current) {
                 isResultContains = true;
                 break;
             }
         }
 
         if (!isResultContains) {
-            tempArr[resultSize++] = current;
+            temp.arr[resultSize++] = current;
         }
     }
 
     Array result(resultSize);
     for (int i = 0; i < resultSize; i++) {
-        result.arr[i] = tempArr[i];
+        result.arr[i] = temp.arr[i];
     }
-
-    delete[] tempArr;
 
     return result;
 }
