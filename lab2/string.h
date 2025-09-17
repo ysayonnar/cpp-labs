@@ -1,26 +1,35 @@
 
 #ifndef STRING_H
 #define STRING_H
-#include <cstring>
-
+#include <iostream>
 
 class String {
-private:
+  private:
     char *data;
     unsigned int length;
     unsigned int capacity;
 
-public:
+  public:
     String();
-    String(const char*);
+    String(const char *);
     String(const String &other);
     ~String();
 
-private:
-    void allocate(unsigned int new_size);
+    String operator+(const String &other);
+    String &operator+=(const String &other);
+    String &operator=(const String &other);
+    bool operator==(const String &other);
+    bool operator!=(const String &other);
+    bool operator<(const String &other);
+    bool operator>(const String &other);
+    bool operator<=(const String &other);
+    bool operator>=(const String &other);
+    char operator[](unsigned int index);
+    friend std::ostream &operator<<(std::ostream &os, const String &s);
 
+  private:
+    void allocate(unsigned int new_capacity);
     void reallocate(unsigned int new_capacity);
 };
-
 
 #endif
