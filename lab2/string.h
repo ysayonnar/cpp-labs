@@ -18,6 +18,7 @@ class String {
     String operator+(const String &other);
     String &operator+=(const String &other);
     String &operator=(const String &other);
+    String operator()(int start, int end);
     bool operator==(const String &other);
     bool operator!=(const String &other);
     bool operator<(const String &other);
@@ -26,6 +27,7 @@ class String {
     bool operator>=(const String &other);
     char operator[](unsigned int index);
     friend std::ostream &operator<<(std::ostream &os, const String &s);
+    friend std::istream &operator>>(std::istream &is, String &s);
 
   private:
     void allocate(unsigned int new_capacity);

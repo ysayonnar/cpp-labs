@@ -80,6 +80,25 @@ String &String::operator=(const String &other) {
     return *this;
 }
 
+String String::operator()(int start, int end) {
+    if (start < 0 || start >= this->length || end < start || end > this->length) {
+        return String();
+    }
+
+    int substr_length = end - start;
+    String sub_string;
+    sub_string.allocate(substr_length + 1);
+
+    for (int i = 0; i < substr_length; i++) {
+        sub_string.data[i] = this->data[start + i];
+    }
+
+    sub_string.data[substr_length] = '\0';
+    sub_string.length = substr_length;
+
+    return sub_string;
+}
+
 bool String::operator==(const String &other) { return std::strcmp(this->data, other.data) == 0; }
 
 bool String::operator!=(const String &other) { return std::strcmp(this->data, other.data) != 0; }
@@ -106,6 +125,23 @@ std::ostream &operator<<(std::ostream &os, const String &s) {
     }
 
     return os;
+}
+
+std::istream &operator>>(std::istream &is, String &s) {
+    const size_t BUFFER_SIZE = 256;
+    char buffer[BUFFER_SIZE];
+
+    is >> buffer;
+
+    delete[] s.data;
+
+    s.length = std::strlen(buffer);
+    s.capacity = s.length + 1;
+    s.data = new char[s.capacity];
+
+    std::strcpy(s.data, buffer);
+
+    return is;
 }
 
 void String::allocate(unsigned int new_capacity) {
