@@ -143,6 +143,16 @@ std::istream &operator>>(std::istream &is, String &s) {
 
     return is;
 }
+unsigned int String::len() { return length; }
+
+unsigned int String::cap() { return capacity; }
+
+char *String::c_str() { return data; }
+
+void String::clear() {
+    allocate(1);
+    data[0] = '\0';
+}
 
 void String::allocate(unsigned int new_capacity) {
     delete[] data;

@@ -6,5 +6,9 @@ int main() {
     std::cout << "Enter string: ";
     std::cin >> s;
 
-    std::cout << "SubString: " << s(0, 3) << std::endl;
+    int min, max;
+    std::cout << "Enter min and max values: ";
+    std::cin >> min >> max;
+
+    std::cout << "Substring: " << s(min, max) << std::endl;
 }

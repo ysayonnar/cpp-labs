@@ -1,4 +1,3 @@
-
 #ifndef STRING_H
 #define STRING_H
 #include <iostream>
@@ -28,6 +27,11 @@ class String {
     char operator[](unsigned int index);
     friend std::ostream &operator<<(std::ostream &os, const String &s);
     friend std::istream &operator>>(std::istream &is, String &s);
+
+    unsigned int len();
+    unsigned int cap();
+    char *c_str();
+    void clear();
 
   private:
     void allocate(unsigned int new_capacity);
