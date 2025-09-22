@@ -2,13 +2,24 @@
 #include <iostream>
 
 int main() {
-    String s;
-    std::cout << "Enter string: ";
-    std::cin >> s;
+    String s("ZALUPA");
 
-    int min, max;
-    std::cout << "Enter min and max values: ";
-    std::cin >> min >> max;
+    if (s.contains('Z')) {
+        std::cout << "True" << std::endl;
+    }
 
-    std::cout << "Substring: " << s(min, max) << std::endl;
+    if (!s.contains('Q')) {
+        std::cout << "False" << std::endl;
+    }
+
+    String ex1("UP");
+    String ex2("YAS");
+
+    if (s.contains(ex1)) {
+        std::cout << "True" << std::endl;
+    }
+
+    if (!s.contains(ex2)) {
+        std::cout << "False" << std::endl;
+    }
 }

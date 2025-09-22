@@ -154,6 +154,58 @@ void String::clear() {
     data[0] = '\0';
 }
 
+bool String::contains(char c) {
+    for (int i = 0; i < capacity; i++) {
+        if (c == data[i]) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+bool String::contains(char *str) {
+    int strLength = std::strlen(str);
+
+    if (strLength == 0)
+        return true;
+    if (length < strLength)
+        return false;
+    if (strLength > length)
+        return false;
+
+    for (unsigned int i = 0; i <= length - strLength; i++) {
+        unsigned int j = 0;
+        while (j < strLength && data[i + j] == str[j]) {
+            j++;
+        }
+        if (j == strLength)
+            return true;
+    }
+
+    return false;
+}
+
+bool String::contains(String &str) {
+    if (str.length == 0)
+        return true;
+    if (length < str.length)
+        return false;
+    if (str.length > length)
+        return false;
+
+    for (unsigned int i = 0; i <= length - str.length; i++) {
+        unsigned int j = 0;
+        while (j < str.length && data[i + j] == str.data[j]) {
+            j++;
+        }
+        if (j == str.length)
+            return true;
+    }
+
+    return false;
+}
+
 void String::allocate(unsigned int new_capacity) {
     delete[] data;
     data = new char[new_capacity];

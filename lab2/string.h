@@ -33,6 +33,10 @@ class String {
     char *c_str();
     void clear();
 
+    bool contains(char c);
+    bool contains(char *str);
+    bool contains(String &str);
+
   private:
     void allocate(unsigned int new_capacity);
     void reallocate(unsigned int new_capacity);
