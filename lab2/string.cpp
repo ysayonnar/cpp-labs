@@ -194,8 +194,8 @@ bool String::contains(String &str) {
     if (str.length > length)
         return false;
 
-    for (unsigned int i = 0; i <= length - str.length; i++) {
-        unsigned int j = 0;
+    for (int i = 0; i <= length - str.length; i++) {
+        int j = 0;
         while (j < str.length && data[i + j] == str.data[j]) {
             j++;
         }
