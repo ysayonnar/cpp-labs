@@ -1,2 +1,2 @@
 run:
-	g++ -o main main.cpp string.cpp && ./main
+	g++ -o main main.cpp string.cpp array.cpp && ./main
