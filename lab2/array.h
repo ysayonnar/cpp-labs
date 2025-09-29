@@ -26,6 +26,7 @@ class Array {
 
     bool operator==(const Array &other);
     bool operator!=(const Array &other);
+    int operator[](unsigned int idx);
 
     friend std::ostream &operator<<(std::ostream &os, const Array &arr);
     friend std::istream &operator>>(std::istream &is, Array &arr);

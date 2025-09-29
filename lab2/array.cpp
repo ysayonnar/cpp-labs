@@ -177,6 +177,14 @@ bool Array::operator==(const Array &other) {
 
 bool Array::operator!=(const Array &other) { return !(*this == other); }
 
+int Array::operator[](unsigned int idx) {
+    if (length == 0 || idx < 0 || idx >= length) {
+        return 0;
+    }
+
+    return arr[idx];
+}
+
 std::ostream &operator<<(std::ostream &os, const Array &arr) {
     if (arr.arr == nullptr || arr.length == 0) {
         os << "Array is empty!";
