@@ -161,6 +161,22 @@ Array Array::get_union(Array &b) {
     return result;
 }
 
+bool Array::operator==(const Array &other) {
+    if (this->length != other.length) {
+        return false;
+    }
+
+    for (int i = 0; i < this->length; i++) {
+        if (this->arr[i] != other.arr[i]) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+bool Array::operator!=(const Array &other) { return !(*this == other); }
+
 std::ostream &operator<<(std::ostream &os, const Array &arr) {
     if (arr.arr == nullptr || arr.length == 0) {
         os << "Array is empty!";

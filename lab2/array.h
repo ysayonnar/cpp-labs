@@ -24,6 +24,9 @@ class Array {
     Array get_intersection(Array &b);
     Array get_union(Array &b);
 
+    bool operator==(const Array &other);
+    bool operator!=(const Array &other);
+
     friend std::ostream &operator<<(std::ostream &os, const Array &arr);
     friend std::istream &operator>>(std::istream &is, Array &arr);
 
