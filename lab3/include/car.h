@@ -20,6 +20,9 @@ class Car : public Vehicle {
     // сеттеры
     void set_passenger_capacity(int capacity);
     void set_model_name(String model);
+
+    friend std::ostream &operator<<(std::ostream &os, const Car &c);
+    friend std::istream &operator>>(std::istream &is, Car &c);
 };
 
 #endif // CAR_H

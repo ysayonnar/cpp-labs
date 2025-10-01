@@ -19,6 +19,9 @@ class Bike : public Vehicle {
     // сеттеры
     void set_gear_count(int gears);
     void set_basket(bool basket);
+
+    friend std::ostream &operator<<(std::ostream &os, const Bike &c);
+    friend std::istream &operator>>(std::istream &is, Bike &c);
 };
 
 #endif // BIKE_H

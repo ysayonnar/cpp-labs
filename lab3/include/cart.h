@@ -19,6 +19,9 @@ class Cart : public Vehicle {
     // сеттеры
     void set_horse_count(int horse_count);
     void set_max_weight(int max_weight);
+
+    friend std::ostream &operator<<(std::ostream &os, const Cart &c);
+    friend std::istream &operator>>(std::istream &is, Cart &c);
 };
 
 #endif // CART_H

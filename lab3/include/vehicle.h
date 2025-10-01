@@ -1,6 +1,8 @@
 #ifndef VEHICLE_H
 #define VEHICLE_H
 
+#include <iostream>
+
 class Vehicle {
   protected:
     int speed;
@@ -17,6 +19,9 @@ class Vehicle {
     // сеттеры
     void set_speed(int speed);
     void set_price_per_hour(int price_per_hour);
+
+    friend std::ostream &operator<<(std::ostream &os, const Vehicle &v);
+    friend std::istream &operator>>(std::istream &is, Vehicle &v);
 };
 
 #endif
