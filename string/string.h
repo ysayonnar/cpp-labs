@@ -4,9 +4,9 @@
 
 class String {
   private:
-    char *data;
-    unsigned int length;
-    unsigned int capacity;
+    char *data = nullptr;
+    unsigned int length = 0;
+    unsigned int capacity = 0;
 
   public:
     String();
