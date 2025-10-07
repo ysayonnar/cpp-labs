@@ -14,7 +14,7 @@ class Bike : public Vehicle {
 
     // геттеры
     int get_gear_count() const;
-    bool has_basket() const;
+    bool get_has_basket() const;
 
     // сеттеры
     void set_gear_count(int gears);
