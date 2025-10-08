@@ -20,6 +20,9 @@ class Vehicle {
     void set_speed(int speed);
     void set_price_per_hour(int price_per_hour);
 
+    double calculate_price(double distance);
+    double calculate_time(double distance);
+
     friend std::ostream &operator<<(std::ostream &os, const Vehicle &v);
     friend std::istream &operator>>(std::istream &is, Vehicle &v);
 };
