@@ -1,9 +1,11 @@
 run:
 	g++ -o main main.cpp \
-		./source/vehicle.cpp \
-		./source/bike.cpp \
-		./source/car.cpp \
-		./source/cart.cpp \
+		./source/computing_machine.cpp \
+		./source/laptop.cpp \
+		./source/monoblock.cpp \
+		./source/personal_computer.cpp \
+		./source/portable_machine.cpp \
+		./source/smart_phone.cpp \
 		../string/string.cpp
 
 	./main

@@ -1,10 +1,11 @@
-#include "./include/car.h"
+#include "./include/smart_phone.h"
 #include <iostream>
 
 int main() {
-    Car v1(100, 20, 4, "Toyota");
-    std::cout << v1 << std::endl;
-    std::cout << "Enter params";
-    std::cin >> v1;
-    std::cout << v1 << std::endl;
+    SmartPhone myPhone("i15", "iOS", 2400, "IPS", true, "lightning");
+    std::cout << myPhone << std::endl;
+
+    std::cout << "Enter params:\t";
+    std::cin >> myPhone;
+    std::cout << std::endl << myPhone << std::endl;
 }
