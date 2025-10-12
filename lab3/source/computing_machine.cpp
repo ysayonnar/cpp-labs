@@ -1,5 +1,5 @@
+#include "../include/computing_machine.h"
 #include "../../string/string.h"
-#include "../include/computing_machice.h"
 #include <iostream>
 
 String ComputingMachine::get_cpu() const { return cpu; }

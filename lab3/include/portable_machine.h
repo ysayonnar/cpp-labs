@@ -2,7 +2,7 @@
 #define PORTABLE_MACHINE_H
 
 #include "../../string/string.h"
-#include "computing_machice.h"
+#include "computing_machine.h"
 
 class PortableMachine : public ComputingMachine {
   protected:

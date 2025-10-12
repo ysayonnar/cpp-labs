@@ -13,5 +13,6 @@ void edit_pc(PersonalComputer &obj);
 void edit_smartphone(SmartPhone &obj);
 void edit_laptop(Laptop &obj);
 void edit_monoblock(Monoblock &obj);
+void clearCin();
 
 #endif

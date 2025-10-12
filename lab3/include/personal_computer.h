@@ -2,7 +2,7 @@
 #define PERSONAL_COMPUTER_H
 
 #include "../../string/string.h"
-#include "computing_machice.h"
+#include "computing_machine.h"
 
 class PersonalComputer : public ComputingMachine {
   protected:

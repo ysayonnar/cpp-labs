@@ -5,6 +5,7 @@ void edit_portable(PortableMachine &obj) {
     do {
         std::cout << "\n1. Set CPU\n2. Set OS\n3. Set battery\n4. Set display\n5. Show\n6. Full input (>>)\n0. Back\n> ";
         std::cin >> choice;
+        clearCin();
         if (choice == 1) {
             std::cout << "CPU: ";
             String s;
@@ -30,6 +31,7 @@ void edit_portable(PortableMachine &obj) {
         } else if (choice == 6) {
             std::cin >> obj;
         }
+        clearCin();
     } while (choice != 0);
 }
 
@@ -38,6 +40,7 @@ void edit_pc(PersonalComputer &obj) {
     do {
         std::cout << "\n1. Set CPU\n2. Set OS\n3. Set ports count\n4. Set form factor\n5. Show\n6. Full input (>>)\n0. Back\n> ";
         std::cin >> choice;
+        clearCin();
         if (choice == 1) {
             std::cout << "CPU: ";
             String s;
@@ -63,6 +66,7 @@ void edit_pc(PersonalComputer &obj) {
         } else if (choice == 6) {
             std::cin >> obj;
         }
+        clearCin();
     } while (choice != 0);
 }
 
@@ -71,6 +75,7 @@ void edit_smartphone(SmartPhone &obj) {
     do {
         std::cout << "\n1. Set CPU\n2. Set OS\n3. Set battery\n4. Set display\n5. Set camera\n6. Set connector\n7. Show\n8. Full input (>>)\n0. Back\n> ";
         std::cin >> choice;
+        clearCin();
         if (choice == 1) {
             std::cout << "CPU: ";
             String s;
@@ -106,6 +111,7 @@ void edit_smartphone(SmartPhone &obj) {
         } else if (choice == 8) {
             std::cin >> obj;
         }
+        clearCin();
     } while (choice != 0);
 }
 
@@ -114,6 +120,7 @@ void edit_laptop(Laptop &obj) {
     do {
         std::cout << "\n1. Set CPU\n2. Set OS\n3. Set battery\n4. Set display\n5. Set touchpad (0/1)\n6. Set USB ports\n7. Show\n8. Full input (>>)\n0. Back\n> ";
         std::cin >> choice;
+        clearCin();
         if (choice == 1) {
             std::cout << "CPU: ";
             String s;
@@ -149,6 +156,7 @@ void edit_laptop(Laptop &obj) {
         } else if (choice == 8) {
             std::cin >> obj;
         }
+        clearCin();
     } while (choice != 0);
 }
 
@@ -157,6 +165,7 @@ void edit_monoblock(Monoblock &obj) {
     do {
         std::cout << "\n1. Set CPU\n2. Set OS\n3. Set ports count\n4. Set form factor\n5. Set webcam (0/1)\n6. Set screen size\n7. Show\n8. Full input (>>)\n0. Back\n> ";
         std::cin >> choice;
+        clearCin();
         if (choice == 1) {
             std::cout << "CPU: ";
             String s;
@@ -192,5 +201,11 @@ void edit_monoblock(Monoblock &obj) {
         } else if (choice == 8) {
             std::cin >> obj;
         }
+        clearCin();
     } while (choice != 0);
+}
+
+void clearCin() {
+    std::cin.clear();
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 }
