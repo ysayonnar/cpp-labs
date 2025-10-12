@@ -5,10 +5,11 @@
 
 class SmartPhone : public PortableMachine {
   protected:
-    bool has_camera;
-    String charging_connector_type;
+    bool has_camera = false;
+    String charging_connector_type = "";
 
   public:
+    SmartPhone() {};
     SmartPhone(String cpu, String operating_system, int battery_capacity, String display_type, bool has_camera, String charging_connector_type) : PortableMachine(cpu, operating_system, battery_capacity, display_type), has_camera(has_camera), charging_connector_type(charging_connector_type) {}
     SmartPhone(const SmartPhone &other) : PortableMachine(other), has_camera(other.has_camera), charging_connector_type(other.charging_connector_type) {}
     ~SmartPhone() = default;

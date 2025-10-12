@@ -5,10 +5,11 @@
 
 class Laptop : public PortableMachine {
   protected:
-    bool has_touchpad;
-    int num_usb_ports;
+    bool has_touchpad = false;
+    int num_usb_ports = 0;
 
   public:
+    Laptop() {};
     Laptop(String cpu, String operating_system, int battery_capacity, String display_type, bool has_touchpad, int num_usb_ports) : PortableMachine(cpu, operating_system, battery_capacity, display_type), has_touchpad(has_touchpad), num_usb_ports(num_usb_ports) {}
     Laptop(const Laptop &other) : PortableMachine(other), has_touchpad(other.has_touchpad), num_usb_ports(other.num_usb_ports) {}
     ~Laptop() = default;

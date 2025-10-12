@@ -6,10 +6,11 @@
 
 class PersonalComputer : public ComputingMachine {
   protected:
-    int ports_count;
-    String case_form_factor;
+    int ports_count = 0;
+    String case_form_factor = "";
 
   public:
+    PersonalComputer() {};
     PersonalComputer(String cpu, String operating_system, int ports_count, String case_form_factor) : ComputingMachine(cpu, operating_system), ports_count(ports_count), case_form_factor(case_form_factor) {}
     PersonalComputer(const PersonalComputer &other) : ComputingMachine(other), ports_count(other.ports_count), case_form_factor(other.case_form_factor) {}
     ~PersonalComputer() = default;

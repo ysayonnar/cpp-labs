@@ -5,10 +5,11 @@
 
 class Monoblock : public PersonalComputer {
   protected:
-    bool has_built_in_webcam;
-    int screen_size;
+    bool has_built_in_webcam = false;
+    int screen_size = 0;
 
   public:
+    Monoblock() {};
     Monoblock(String cpu, String operating_system, int ports_count, String case_form_factor, bool has_built_in_webcam, int screen_size) : PersonalComputer(cpu, operating_system, ports_count, case_form_factor), has_built_in_webcam(has_built_in_webcam), screen_size(screen_size) {}
     Monoblock(const Monoblock &other) : PersonalComputer(other), has_built_in_webcam(other.has_built_in_webcam), screen_size(other.screen_size) {}
     ~Monoblock() = default;

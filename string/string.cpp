@@ -100,7 +100,9 @@ String String::operator()(int start, int end) {
     return sub_string;
 }
 
-bool String::operator==(const String &other) { return std::strcmp(this->data, other.data) == 0; }
+bool String::operator==(const String &other) const { return std::strcmp(this->data, other.data) == 0; }
+
+bool String::operator==(const char *str) const { return std::strcmp(this->data, str) == 0; }
 
 bool String::operator!=(const String &other) { return std::strcmp(this->data, other.data) != 0; }
 

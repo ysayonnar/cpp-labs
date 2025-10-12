@@ -19,14 +19,16 @@ SmartPhone &SmartPhone::operator=(const SmartPhone &other) {
 
 std::ostream &operator<<(std::ostream &os, const SmartPhone &phone) {
     os << static_cast<const PortableMachine &>(phone);
-    os << " Has camera: " << (phone.has_camera ? "yes" : "no");
-    os << ", Charging connector: " << phone.charging_connector_type;
+    os << "Has camera: " << (phone.has_camera ? "yes" : "no") << std::endl;
+    os << "Charging connector: " << (phone.charging_connector_type == "" ? "None" : phone.charging_connector_type) << std::endl;
     return os;
 }
 
 std::istream &operator>>(std::istream &is, SmartPhone &phone) {
     is >> static_cast<PortableMachine &>(phone);
+    std::cout << "Enter 0 or 1 if phone has camera:\t";
     is >> phone.has_camera;
+    std::cout << "Enter charging connector type:\t";
     is >> phone.charging_connector_type;
     return is;
 }

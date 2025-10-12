@@ -19,14 +19,16 @@ Monoblock &Monoblock::operator=(const Monoblock &other) {
 
 std::ostream &operator<<(std::ostream &os, const Monoblock &mono) {
     os << static_cast<const PersonalComputer &>(mono);
-    os << " Built-in webcam: " << (mono.has_built_in_webcam ? "yes" : "no");
-    os << ", Screen size: " << mono.screen_size;
+    os << "Built-in webcam: " << (mono.has_built_in_webcam ? "yes" : "no") << std::endl;
+    os << "Screen size: " << mono.screen_size << std::endl;
     return os;
 }
 
 std::istream &operator>>(std::istream &is, Monoblock &mono) {
     is >> static_cast<PersonalComputer &>(mono);
+    std::cout << "Enter 0 or 1 if monoblock has webcamera:\t";
     is >> mono.has_built_in_webcam;
+    std::cout << "Enter screen size:\t";
     is >> mono.screen_size;
     return is;
 }

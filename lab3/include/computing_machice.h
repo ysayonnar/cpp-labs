@@ -6,10 +6,11 @@
 
 class ComputingMachine {
   protected:
-    String cpu;
-    String operating_system;
+    String cpu = "";
+    String operating_system = "";
 
   public:
+    ComputingMachine() {};
     ComputingMachine(String cpu, String operating_system) : cpu(cpu), operating_system(operating_system) {}
     ComputingMachine(const ComputingMachine &other) : cpu(other.cpu), operating_system(other.operating_system) {}
     virtual ~ComputingMachine() = default;

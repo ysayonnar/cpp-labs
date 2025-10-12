@@ -19,14 +19,16 @@ Laptop &Laptop::operator=(const Laptop &other) {
 
 std::ostream &operator<<(std::ostream &os, const Laptop &laptop) {
     os << static_cast<const PortableMachine &>(laptop);
-    os << " Has touchpad: " << (laptop.has_touchpad ? "yes" : "no");
-    os << ", USB ports: " << laptop.num_usb_ports;
+    os << "Has touchpad:\t" << (laptop.has_touchpad ? "yes" : "no") << std::endl;
+    os << "USB ports:\t" << laptop.num_usb_ports << std::endl;
     return os;
 }
 
 std::istream &operator>>(std::istream &is, Laptop &laptop) {
     is >> static_cast<PortableMachine &>(laptop);
+    std::cout << "Enter 0 or 1 if laptop has touchpad:\t";
     is >> laptop.has_touchpad;
+    std::cout << "Enter number of usb-ports:\t";
     is >> laptop.num_usb_ports;
     return is;
 }

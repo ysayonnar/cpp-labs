@@ -19,14 +19,16 @@ PortableMachine &PortableMachine::operator=(const PortableMachine &other) {
 
 std::ostream &operator<<(std::ostream &os, const PortableMachine &machine) {
     os << static_cast<const ComputingMachine &>(machine);
-    os << " Battery capacity: " << machine.battery_capacity;
-    os << ", Display type: " << machine.display_type;
+    os << "Battery capacity:\t" << machine.battery_capacity << std::endl;
+    os << "Display type:\t" << (machine.display_type == "" ? "None" : machine.display_type) << std::endl;
     return os;
 }
 
 std::istream &operator>>(std::istream &is, PortableMachine &machine) {
     is >> static_cast<ComputingMachine &>(machine);
+    std::cout << "Enter battery capacity:\t";
     is >> machine.battery_capacity;
+    std::cout << "Enter display type:\t";
     is >> machine.display_type;
     return is;
 }

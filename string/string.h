@@ -18,7 +18,8 @@ class String {
     String &operator+=(const String &other);
     String &operator=(const String &other);
     String operator()(int start, int end);
-    bool operator==(const String &other);
+    bool operator==(const String &other) const;
+    bool operator==(const char *str) const;
     bool operator!=(const String &other);
     bool operator<(const String &other);
     bool operator>(const String &other);
