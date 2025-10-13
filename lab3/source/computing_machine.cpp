@@ -1,5 +1,6 @@
 #include "../include/computing_machine.h"
 #include "../../string/string.h"
+#include <iomanip>
 #include <iostream>
 
 String ComputingMachine::get_cpu() const { return cpu; }
@@ -17,9 +18,8 @@ ComputingMachine &ComputingMachine::operator=(const ComputingMachine &other) {
 }
 
 std::ostream &operator<<(std::ostream &os, const ComputingMachine &machine) {
-    os << "MACHINE TYPE:\t" << machine.machine_type() << std::endl;
-    os << "CPU:\t" << (machine.cpu == "" ? "None" : machine.cpu) << std::endl;
-    os << "OS:\t" << (machine.operating_system == "" ? "None" : machine.operating_system) << std::endl;
+    os << std::setw(10) << (machine.cpu == "" ? "None" : machine.cpu) << "\t";
+    os << std::setw(16) << (machine.operating_system == "" ? "None" : machine.operating_system) << "\t";
     return os;
 }
 

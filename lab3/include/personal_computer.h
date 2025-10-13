@@ -15,6 +15,7 @@ class PersonalComputer : public ComputingMachine {
     PersonalComputer(const PersonalComputer &other) : ComputingMachine(other), ports_count(other.ports_count), case_form_factor(other.case_form_factor) {}
     virtual ~PersonalComputer() = default;
 
+    void print_header() const override;
     String machine_type() const override;
 
     int get_ports_count() const;

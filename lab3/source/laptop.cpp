@@ -1,5 +1,7 @@
 #include "../include/laptop.h"
+#include <iomanip>
 
+void Laptop::print_header() const { std::cout << "Proccesor\tOperating_system\tBattery_capacity\tDisplay_type\tHas_touchpad\tNum_usb_ports" << std::endl; }
 String Laptop::machine_type() const { return String("Laptop"); }
 
 bool Laptop::get_has_touchpad() const { return has_touchpad; }
@@ -19,8 +21,8 @@ Laptop &Laptop::operator=(const Laptop &other) {
 
 std::ostream &operator<<(std::ostream &os, const Laptop &laptop) {
     os << static_cast<const PortableMachine &>(laptop);
-    os << "Has touchpad:\t" << (laptop.has_touchpad ? "yes" : "no") << std::endl;
-    os << "USB ports:\t" << laptop.num_usb_ports << std::endl;
+    os << std::setw(12) << (laptop.has_touchpad ? "yes" : "no") << "\t";
+    os << std::setw(13) << laptop.num_usb_ports << "\t";
     return os;
 }
 

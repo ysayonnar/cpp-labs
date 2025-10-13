@@ -59,17 +59,23 @@ String &String::operator=(const String &other) {
         return *this;
     }
 
-    // Проверяем, достаточно ли текущей памяти
-    if (other.length + 1 > capacity) {
+    *this = other.data;
+
+    return *this;
+}
+
+String &String::operator=(const char *str) {
+    int len = std::strlen(str);
+    if (len + 1 > capacity) {
         delete[] data;
-        capacity = other.length + 1;
+        capacity = len + 1;
         data = new char[capacity];
     }
 
-    length = other.length;
+    length = len;
 
-    if (other.data != nullptr) {
-        std::strcpy(data, other.data);
+    if (str != nullptr) {
+        std::strcpy(data, str);
     } else {
         data[0] = '\0';
     }

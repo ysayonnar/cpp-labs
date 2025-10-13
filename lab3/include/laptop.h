@@ -14,6 +14,7 @@ class Laptop : public PortableMachine {
     Laptop(const Laptop &other) : PortableMachine(other), has_touchpad(other.has_touchpad), num_usb_ports(other.num_usb_ports) {}
     ~Laptop() = default;
 
+    void print_header() const override;
     String machine_type() const override;
 
     bool get_has_touchpad() const;

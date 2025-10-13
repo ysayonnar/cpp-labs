@@ -1,5 +1,7 @@
 #include "../include/portable_machine.h"
+#include <iomanip>
 
+void PortableMachine::print_header() const { std::cout << "Proccesor\tOperating_system\tBattery_capacity\tDisplay_type" << std::endl; }
 String PortableMachine::machine_type() const { return "Portable Machine"; }
 
 int PortableMachine::get_battery_capacity() const { return battery_capacity; }
@@ -19,8 +21,8 @@ PortableMachine &PortableMachine::operator=(const PortableMachine &other) {
 
 std::ostream &operator<<(std::ostream &os, const PortableMachine &machine) {
     os << static_cast<const ComputingMachine &>(machine);
-    os << "Battery capacity:\t" << machine.battery_capacity << std::endl;
-    os << "Display type:\t" << (machine.display_type == "" ? "None" : machine.display_type) << std::endl;
+    os << std::setw(16) << machine.battery_capacity << "\t";
+    os << std::setw(12) << (machine.display_type == "" ? "None" : machine.display_type) << "\t";
     return os;
 }
 

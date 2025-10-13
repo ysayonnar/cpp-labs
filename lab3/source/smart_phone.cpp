@@ -1,5 +1,7 @@
 #include "../include/smart_phone.h"
+#include <iomanip>
 
+void SmartPhone::print_header() const { std::cout << "Proccesor\tOperating_system\tBattery_capacity\tDisplay_type\tHas_camera\tCharging_adapter_type" << std::endl; }
 String SmartPhone::machine_type() const { return String("SmartPhone"); }
 
 bool SmartPhone::get_has_camera() const { return has_camera; }
@@ -19,8 +21,8 @@ SmartPhone &SmartPhone::operator=(const SmartPhone &other) {
 
 std::ostream &operator<<(std::ostream &os, const SmartPhone &phone) {
     os << static_cast<const PortableMachine &>(phone);
-    os << "Has camera: " << (phone.has_camera ? "yes" : "no") << std::endl;
-    os << "Charging connector: " << (phone.charging_connector_type == "" ? "None" : phone.charging_connector_type) << std::endl;
+    os << std::setw(10) << (phone.has_camera ? "yes" : "no") << "\t";
+    os << std::setw(20) << (phone.charging_connector_type == "" ? "None" : phone.charging_connector_type) << "\t";
     return os;
 }
 

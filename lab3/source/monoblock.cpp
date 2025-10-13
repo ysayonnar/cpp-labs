@@ -1,5 +1,7 @@
 #include "../include/monoblock.h"
+#include <iomanip>
 
+void Monoblock::print_header() const { std::cout << "Proccesor\tOperatin_system\tPorts_count\tCase_form_factor\tHas_built_in_webcam\tScreen_size" << std::endl; }
 String Monoblock::machine_type() const { return String("Monoblock"); }
 
 bool Monoblock::get_has_built_in_webcam() const { return has_built_in_webcam; }
@@ -19,8 +21,8 @@ Monoblock &Monoblock::operator=(const Monoblock &other) {
 
 std::ostream &operator<<(std::ostream &os, const Monoblock &mono) {
     os << static_cast<const PersonalComputer &>(mono);
-    os << "Built-in webcam: " << (mono.has_built_in_webcam ? "yes" : "no") << std::endl;
-    os << "Screen size: " << mono.screen_size << std::endl;
+    os << std::setw(19) << (mono.has_built_in_webcam ? "yes" : "no") << "\t";
+    os << std::setw(12) << mono.screen_size << "\t";
     return os;
 }
 

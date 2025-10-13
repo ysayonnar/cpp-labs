@@ -17,6 +17,7 @@ class String {
     String operator+(const String &other);
     String &operator+=(const String &other);
     String &operator=(const String &other);
+    String &operator=(const char *str);
     String operator()(int start, int end);
     bool operator==(const String &other) const;
     bool operator==(const char *str) const;

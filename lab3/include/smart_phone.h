@@ -14,6 +14,7 @@ class SmartPhone : public PortableMachine {
     SmartPhone(const SmartPhone &other) : PortableMachine(other), has_camera(other.has_camera), charging_connector_type(other.charging_connector_type) {}
     ~SmartPhone() = default;
 
+    void print_header() const override;
     String machine_type() const override;
 
     bool get_has_camera() const;

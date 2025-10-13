@@ -15,6 +15,7 @@ class PortableMachine : public ComputingMachine {
     PortableMachine(const PortableMachine &other) : ComputingMachine(other), battery_capacity(other.battery_capacity), display_type(other.display_type) {}
     virtual ~PortableMachine() = default;
 
+    void print_header() const override;
     String machine_type() const override;
 
     int get_battery_capacity() const;

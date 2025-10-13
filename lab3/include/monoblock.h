@@ -14,6 +14,7 @@ class Monoblock : public PersonalComputer {
     Monoblock(const Monoblock &other) : PersonalComputer(other), has_built_in_webcam(other.has_built_in_webcam), screen_size(other.screen_size) {}
     ~Monoblock() = default;
 
+    void print_header() const override;
     String machine_type() const override;
 
     bool get_has_built_in_webcam() const;

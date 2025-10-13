@@ -16,6 +16,7 @@ class ComputingMachine {
     virtual ~ComputingMachine() = default;
 
     virtual String machine_type() const = 0;
+    virtual void print_header() const = 0;
 
     String get_cpu() const;
     String get_operating_system() const;
