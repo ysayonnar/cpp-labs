@@ -13,7 +13,7 @@ class PortableMachine : public ComputingMachine {
     PortableMachine() {};
     PortableMachine(String cpu, String operating_system, int battery_capacity, String display_type) : ComputingMachine(cpu, operating_system), battery_capacity(battery_capacity), display_type(display_type) {}
     PortableMachine(const PortableMachine &other) : ComputingMachine(other), battery_capacity(other.battery_capacity), display_type(other.display_type) {}
-    ~PortableMachine() = default;
+    virtual ~PortableMachine() = default;
 
     String machine_type() const override;
 
