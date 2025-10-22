@@ -1,5 +1,5 @@
 run:
-	g++ -o main main.cpp \
+	@g++ -o main main.cpp \
 		./source/computing_machine.cpp \
 		./source/laptop.cpp \
 		./source/monoblock.cpp \
