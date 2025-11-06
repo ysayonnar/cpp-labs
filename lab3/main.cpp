@@ -3,8 +3,13 @@
 #include <iostream>
 
 int main() {
+    // TODO: перенести функции редактирования обеьктов в методы для каждого обьекта
+    // TODO: переписать шапку на вызов родительских
 
     int amount = 3;
+    std::cout << "Enter how many devices to create:\t";
+    std::cin >> amount;
+
     SmartPhone smartphone_obj[amount];
     for (int i = 0; i < amount; i++) {
         std::cout << std::endl << "Enter object number " << i << std::endl;
