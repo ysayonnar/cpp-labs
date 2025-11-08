@@ -16,6 +16,7 @@ class SmartPhone : public PortableMachine {
 
     void print_header() const override;
     String machine_type() const override;
+    void edit() override;
 
     bool get_has_camera() const;
     String get_charging_connector_type() const;

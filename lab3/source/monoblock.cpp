@@ -1,8 +1,58 @@
 #include "../include/monoblock.h"
 #include <iomanip>
 
-void Monoblock::print_header() const { std::cout << "Proccesor\tOperatin_system\tPorts_count\tCase_form_factor\tHas_built_in_webcam\tScreen_size" << std::endl; }
+void Monoblock::print_header() const {
+    PersonalComputer::print_header();
+    std::cout << "Has_built_in_webcam\tScreen_size\t";
+}
 String Monoblock::machine_type() const { return String("Monoblock"); }
+
+void Monoblock::edit() {
+    int choice;
+    do {
+        std::cout << "\n1. Set CPU\n2. Set OS\n3. Set ports count\n4. Set form factor\n5. Set webcam (0/1)\n6. Set screen size\n7. Show\n8. Full input (>>)\n0. Back\n> ";
+        std::cin >> choice;
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        if (choice == 1) {
+            std::cout << "CPU: ";
+            String s;
+            std::cin >> s;
+            set_cpu(s);
+        } else if (choice == 2) {
+            std::cout << "OS: ";
+            String s;
+            std::cin >> s;
+            set_operating_system(s);
+        } else if (choice == 3) {
+            std::cout << "Ports: ";
+            int p;
+            std::cin >> p;
+            set_ports_count(p);
+        } else if (choice == 4) {
+            std::cout << "Form factor: ";
+            String s;
+            std::cin >> s;
+            set_case_form_factor(s);
+        } else if (choice == 5) {
+            std::cout << "Has webcam (0/1): ";
+            int w;
+            std::cin >> w;
+            set_has_built_in_webcam(w);
+        } else if (choice == 6) {
+            std::cout << "Screen size: ";
+            int sz;
+            std::cin >> sz;
+            set_screen_size(sz);
+        } else if (choice == 7) {
+            std::cout << *this << std::endl;
+        } else if (choice == 8) {
+            std::cin >> *this;
+        }
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    } while (choice != 0);
+}
 
 bool Monoblock::get_has_built_in_webcam() const { return has_built_in_webcam; }
 int Monoblock::get_screen_size() const { return screen_size; }

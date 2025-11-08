@@ -17,6 +17,7 @@ class PortableMachine : public ComputingMachine {
 
     void print_header() const override;
     String machine_type() const override;
+    void edit() override;
 
     int get_battery_capacity() const;
     String get_display_type() const;

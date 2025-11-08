@@ -1,8 +1,49 @@
 #include "../include/personal_computer.h"
 #include <iomanip>
 
-void PersonalComputer::print_header() const { std::cout << "Proccesor\tOperatin_system\tPorts_count\tCase_form_factor" << std::endl; }
+void PersonalComputer::print_header() const {
+    ComputingMachine::print_header();
+    std::cout << "Ports_count\tCase_form_factor\t";
+}
 String PersonalComputer::machine_type() const { return "Personal Computer"; }
+
+void PersonalComputer::edit() {
+    int choice;
+    do {
+        std::cout << "\n1. Set CPU\n2. Set OS\n3. Set ports count\n4. Set form factor\n5. Show\n6. Full input (>>)\n0. Back\n> ";
+        std::cin >> choice;
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        if (choice == 1) {
+            std::cout << "CPU: ";
+            String s;
+            std::cin >> s;
+            set_cpu(s);
+        } else if (choice == 2) {
+            std::cout << "OS: ";
+            String s;
+            std::cin >> s;
+            set_operating_system(s);
+        } else if (choice == 3) {
+            std::cout << "Ports: ";
+            int p;
+            std::cin >> p;
+            set_ports_count(p);
+        } else if (choice == 4) {
+            std::cout << "Form factor: ";
+            String s;
+            std::cin >> s;
+            set_case_form_factor(s);
+        } else if (choice == 5) {
+            std::cout << *this << std::endl;
+        } else if (choice == 6) {
+            std::cin >> *this;
+        }
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+    } while (choice != 0);
+}
 
 int PersonalComputer::get_ports_count() const { return ports_count; }
 String PersonalComputer::get_case_form_factor() const { return case_form_factor; }

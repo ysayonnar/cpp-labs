@@ -3,6 +3,8 @@
 #include <iomanip>
 #include <iostream>
 
+void ComputingMachine::print_header() const { std::cout << "Proccesor\tOperating_system\t"; }
+
 String ComputingMachine::get_cpu() const { return cpu; }
 String ComputingMachine::get_operating_system() const { return operating_system; }
 

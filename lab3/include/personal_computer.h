@@ -17,6 +17,7 @@ class PersonalComputer : public ComputingMachine {
 
     void print_header() const override;
     String machine_type() const override;
+    void edit() override;
 
     int get_ports_count() const;
     String get_case_form_factor() const;

@@ -1,11 +1,7 @@
-
-#include "include/device_menu.h"
+#include "include/smart_phone.h"
 #include <iostream>
 
 int main() {
-    // TODO: перенести функции редактирования обеьктов в методы для каждого обьекта
-    // TODO: переписать шапку на вызов родительских
-
     int amount = 3;
     std::cout << "Enter how many devices to create:\t";
     std::cin >> amount;
@@ -21,6 +17,8 @@ int main() {
     do {
         std::cout << std::endl;
         smartphone_obj[0].print_header();
+        std::cout << std::endl;
+
         for (int i = 0; i < amount; i++) {
             std::cout << smartphone_obj[i] << std::endl;
         }
@@ -31,7 +29,7 @@ int main() {
             std::cout << "max value is " << amount << " and min value is 0" << std::endl;
             continue;
         } else {
-            edit_smartphone(smartphone_obj[number_device]);
+            smartphone_obj[number_device].edit();
         }
 
     } while (main_choice != -1);

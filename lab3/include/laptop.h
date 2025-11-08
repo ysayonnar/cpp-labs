@@ -16,6 +16,7 @@ class Laptop : public PortableMachine {
 
     void print_header() const override;
     String machine_type() const override;
+    void edit() override;
 
     bool get_has_touchpad() const;
     int get_num_usb_ports() const;
