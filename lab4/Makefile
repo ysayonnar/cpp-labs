@@ -6,6 +6,7 @@ run:
 		./source/personal_computer.cpp \
 		./source/portable_machine.cpp \
 		./source/smart_phone.cpp \
-		../string/string.cpp
+		../string/string.cpp \
+		./source/menu.cpp
 
 	./main 
