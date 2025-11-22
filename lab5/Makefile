@@ -7,6 +7,7 @@ run:
 		./source/portable_machine.cpp \
 		./source/smart_phone.cpp \
 		../string/string.cpp \
-		./source/menu.cpp
+		./source/menu.cpp \
+		./source/input_utils.cpp \
 
 	./main 

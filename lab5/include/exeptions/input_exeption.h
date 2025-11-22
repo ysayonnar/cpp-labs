@@ -3,7 +3,11 @@
 
 #include "core_exeption.h"
 
-// input exeption describes [1; 50] error codes
+// InputExeption covers [1; 50] error codes
+// 1 - out of range
+// 2 - invalid type
+// 3 - unacceptable input
+
 class InputExeption : public CoreExeption {
   private:
     char err[20];
@@ -16,7 +20,7 @@ class InputExeption : public CoreExeption {
 
     friend std::ostream &operator<<(std::ostream &os, const InputExeption &exp) {
         os << static_cast<const CoreExeption &>(exp);
-        os << ", err: ", exp.err;
+        os << ", err: " << exp.err;
         return os;
     }
 };

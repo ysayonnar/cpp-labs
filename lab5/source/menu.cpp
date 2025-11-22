@@ -1,4 +1,5 @@
 #include "../include/menu.h"
+#include "../include/input_utils.h"
 #include <limits>
 
 void Menu::clearStdin() {
@@ -17,11 +18,7 @@ void Menu::run() {
         std::cout << "5) PersonalComputer (generic)\n";
         std::cout << "0) Exit\n";
         std::cout << "Choice: ";
-        if (!(std::cin >> choice)) {
-            clearStdin();
-            std::cout << "Invalid input.\n";
-            continue;
-        }
+        choice = input_int(0, 5);
 
         switch (choice) {
         case 1:
@@ -61,11 +58,7 @@ template <typename T> void Menu::familyMenu(LinkedList<T> &list, const std::stri
         std::cout << "6) Edit device by index\n";
         std::cout << "0) Back to main menu\n";
         std::cout << "Choice: ";
-        if (!(std::cin >> choice)) {
-            clearStdin();
-            std::cout << "Invalid input.\n";
-            continue;
-        }
+        choice = input_int(0, 6);
 
         switch (choice) {
         case 1:
