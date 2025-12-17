@@ -18,7 +18,7 @@ void Menu::run() {
         std::cout << "5) PersonalComputer (generic)\n";
         std::cout << "0) Exit\n";
         std::cout << "Choice: ";
-        choice = input_int(std::cin, 0, 5);
+        choice = input_int(0, 5);
 
         switch (choice) {
         case 1:
@@ -58,7 +58,7 @@ template <typename T> void Menu::familyMenu(LinkedList<T> &list, const std::stri
         std::cout << "6) Edit device by index\n";
         std::cout << "0) Back to main menu\n";
         std::cout << "Choice: ";
-        choice = input_int(std::cin, 0, 6);
+        choice = input_int(0, 6);
 
         switch (choice) {
         case 1:

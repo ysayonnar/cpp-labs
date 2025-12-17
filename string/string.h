@@ -14,6 +14,8 @@ class String {
     String(const String &other);
     ~String();
 
+    int get_length() { return length; }
+
     String operator+(const String &other);
     String &operator+=(const String &other);
     String &operator=(const String &other);

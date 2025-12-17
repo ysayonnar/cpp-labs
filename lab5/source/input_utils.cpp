@@ -1,88 +1,97 @@
 #include "../../string/string.h"
 #include "../include/exeptions/input_exeption.h"
+#include <cctype>
+#include <cerrno>
+#include <cstdlib>
 #include <iostream>
+#include <limits>
+#include <string>
 
-int input_int(int min, int max) {
+int input_int(std::istream &input, int min, int max) {
     while (true) {
         try {
             int num;
-            if (!(std::cin >> num)) {
-                std::cin.clear();
-                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-                throw InputExeption(1, "invalid input", "parse error");
+            std::cout << " (num from " << min << " to " << max << ") ";
+
+            if (input >> num) {
+                if (input.peek() != '\n' && input.peek() != EOF) {
+                    input.clear();
+                    input.ignore(max, '\n');
+                    throw InputExeption(1, "invalid input", "invalid");
+                }
+                input.ignore(max, '\n');
+                if (num > max || num < min) {
+                    throw InputExeption(2, "value out of bound", "out of bounds");
+                }
+
+                return num;
+            } else {
+                input.clear();
+                input.ignore(max, '\n');
+                throw InputExeption(1, "invalid", "invalid");
             }
-
-            if (num < min || num > max) {
-                char buf[80];
-                snprintf(buf, sizeof(buf), "value must be from %d to %d", min, max);
-                throw InputExeption(1, buf, "out of range");
-            }
-
-            // consume rest of line
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-
-            return num;
         } catch (const InputExeption &e) {
             std::cout << "\terr:" << e << ", insert again\n";
+            input.clear();
         }
     }
 }
 
-float input_float(float min, float max) {
+int input_float(std::istream &input, float min, float max) {
     while (true) {
         try {
             float num;
-            if (!(std::cin >> num)) {
-                std::cin.clear();
-                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-                throw InputExeption(1, "invalid input", "parse error");
-            }
+            std::cout << " (num from " << min << " to " << max << ") ";
 
-            if (num < min || num > max) {
-                char buf[80];
-                snprintf(buf, sizeof(buf), "value must be from %g to %g", (double)min, (double)max);
-                throw InputExeption(1, buf, "out of range");
-            }
+            if (input >> num) {
+                if (input.peek() != '\n' && input.peek() != EOF) {
+                    input.clear();
+                    input.ignore(max, '\n');
+                    throw InputExeption(1, "invalid input", "invalid");
+                }
+                input.ignore(max, '\n');
+                if (num > max || num < min) {
+                    throw InputExeption(2, "value out of bound", "out of bounds");
+                }
 
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            return num;
+                return num;
+            } else {
+                input.clear();
+                input.ignore(INT_MAX, '\n');
+                throw InputExeption(1, "invalid input", "invalid");
+            }
         } catch (const InputExeption &e) {
             std::cout << "\terr:" << e << ", insert again\n";
+            input.clear();
         }
     }
 }
 
-// if min_len and max_len less of equal to 0, they will be ignored
-String input_string_eng(int min_len, int max_len) {
+String input_string_eng(std::istream &input) {
     while (true) {
         try {
-            std::string tmp;
-            std::getline(std::cin, tmp);
-            if (tmp.empty()) {
-                // if getline got empty because previous >> left newline, try again
-                if (!std::getline(std::cin, tmp) || tmp.empty()) {
-                    throw InputExeption(2, "value can't be empty", "unacceptable input");
+            int max_len = 80;
+            std::cout << " (only English letters A-Z and a-z allowed) ";
+            char str[max_len];
+            input.getline(str, max_len);
+            if (str[0] == '\0') {
+                throw InputExeption(1, "invalid input", "value ouf of bounds");
+            } else {
+                for (int i = 0; str[i] != '\0'; i++) {
+                    unsigned char c = str[i];
+                    if (!(c >= 'a' && c <= 'z') && !(c >= 'A' && c <= 'Z') && c != ' ' && c != '\'' && c != '-') {
+                        if (c > 127) {
+                            throw InputExeption(4, "only english letters", "invalid");
+                        } else {
+                            throw InputExeption(1, "invalid input", "value ouf of bounds");
+                        }
+                    }
                 }
+                return str;
             }
-
-            // construct String from c_str
-            String str(tmp.c_str());
-
-            if ((min_len > 0 && str.get_length() < min_len) || (max_len > 0 && str.get_length() > max_len)) {
-                char buf[80];
-                snprintf(buf, sizeof(buf), "value length must be from %d to %d", min_len, max_len);
-                throw InputExeption(2, buf, "unacceptable input");
-            }
-
-            for (int i = 0; i < str.get_length(); i++) {
-                if (str[i] > 126 || str[i] < 32) {
-                    throw InputExeption(2, "only ascii symbols supported", "unacceptable input");
-                }
-            }
-
-            return str;
         } catch (const InputExeption &e) {
             std::cout << "\terr:" << e << ", insert again\n";
+            input.clear();
         }
     }
 }

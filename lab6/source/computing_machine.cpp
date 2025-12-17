@@ -28,8 +28,8 @@ std::ostream &operator<<(std::ostream &os, const ComputingMachine &machine) {
 
 std::istream &operator>>(std::istream &is, ComputingMachine &machine) {
     std::cout << "Enter name of CPU:\t";
-    machine.cpu = input_string_eng(is);
+    machine.cpu = input_string_eng(1, 20);
     std::cout << "Enter name of operating system:\t";
-    machine.operating_system = input_string_eng(is);
+    machine.operating_system = input_string_eng(1, 50);
     return is;
 }
