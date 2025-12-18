@@ -7,6 +7,7 @@
 #include <limits>
 #include <string>
 
+// goodbit, badbit - critical, failbit - format err, eofbit
 int input_int(std::istream &input, int min, int max) {
     while (true) {
         try {
