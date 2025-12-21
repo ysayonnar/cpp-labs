@@ -1,6 +1,8 @@
 #include "../include/personal_computer.h"
 #include "../include/input_utils.h"
+#include "../include/serialization_utils.h"
 #include <iomanip>
+#include <sstream>
 
 void PersonalComputer::print_header() const {
     ComputingMachine::print_header();
@@ -71,4 +73,37 @@ std::istream &operator>>(std::istream &is, PersonalComputer &pc) {
     std::cout << "Enter case_form_factor:\t";
     pc.case_form_factor = input_string_eng(is);
     return is;
+}
+
+std::string PersonalComputer::text_header() const { return ComputingMachine::text_header() + std::string("Ports_count\tCase_form_factor\t"); }
+
+void PersonalComputer::to_text_row(std::ostream &os) const {
+    ComputingMachine::to_text_row(os);
+    const char *cff = (case_form_factor == "") ? "" : case_form_factor.c_str();
+    os << ports_count << '\t' << cff << '\t';
+}
+
+void PersonalComputer::from_text_row(const std::string &line) {
+    ComputingMachine::from_text_row(line);
+    std::istringstream iss(line);
+    std::string token;
+    for (int i = 0; i < 3; ++i)
+        std::getline(iss, token, '\t');
+    if (std::getline(iss, token, '\t'))
+        ports_count = std::stoi(token);
+    if (std::getline(iss, token, '\t'))
+        case_form_factor = String(token.c_str());
+}
+
+void PersonalComputer::write_raw(std::ostream &os) const {
+    ComputingMachine::write_raw(os);
+    os.write(reinterpret_cast<const char *>(&ports_count), sizeof(ports_count));
+    write_string_raw(os, case_form_factor.c_str());
+}
+
+void PersonalComputer::read_raw(std::istream &is) {
+    ComputingMachine::read_raw(is);
+    is.read(reinterpret_cast<char *>(&ports_count), sizeof(ports_count));
+    std::string s = read_string_raw(is);
+    case_form_factor = String(s.c_str());
 }

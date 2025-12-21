@@ -26,6 +26,8 @@ String::String(const String &other) : data(nullptr), length(other.length), capac
 
 String::~String() { delete[] data; }
 
+const char *String::c_str() const { return data; }
+
 String String::operator+(const String &other) {
     String new_string;
 

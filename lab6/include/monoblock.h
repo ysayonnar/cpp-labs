@@ -27,6 +27,11 @@ class Monoblock : public PersonalComputer {
     Monoblock &operator=(const Monoblock &other);
     friend std::ostream &operator<<(std::ostream &os, const Monoblock &mono);
     friend std::istream &operator>>(std::istream &is, Monoblock &mono);
+    void to_text_row(std::ostream &os) const override;
+    void from_text_row(const std::string &line) override;
+    std::string text_header() const override;
+    void write_raw(std::ostream &os) const override;
+    void read_raw(std::istream &is) override;
 };
 
 #endif

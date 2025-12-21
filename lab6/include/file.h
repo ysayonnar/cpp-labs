@@ -1,5 +1,5 @@
-#ifndef LAPTOP_H
-#define LAPTOP_H
+#ifndef FILE_H
+#define FILE_H
 
 #include <fstream>
 #include <string>
@@ -27,4 +27,4 @@ class File {
     File &operator=(const File &) = delete;
 };
 
-#endif
+#endif // FILE_H

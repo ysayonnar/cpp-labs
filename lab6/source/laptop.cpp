@@ -1,6 +1,8 @@
 #include "../include/laptop.h"
 #include "../include/input_utils.h"
+#include "../include/serialization_utils.h"
 #include <iomanip>
+#include <sstream>
 
 void Laptop::print_header() const {
     PortableMachine::print_header();
@@ -78,4 +80,39 @@ std::istream &operator>>(std::istream &is, Laptop &laptop) {
     std::cout << "Enter number of usb-ports:\t";
     laptop.num_usb_ports = input_int(is, 0, 100);
     return is;
+}
+
+std::string Laptop::text_header() const { return PortableMachine::text_header() + std::string("Has_touchpad\tNum_usb_ports\t"); }
+
+void Laptop::to_text_row(std::ostream &os) const {
+    PortableMachine::to_text_row(os);
+    os << (has_touchpad ? 1 : 0) << '\t' << num_usb_ports << '\t';
+}
+
+void Laptop::from_text_row(const std::string &line) {
+    PortableMachine::from_text_row(line);
+    std::istringstream iss(line);
+    std::string token;
+    // skip type,cpu,os,battery,display
+    for (int i = 0; i < 5; ++i)
+        std::getline(iss, token, '\t');
+    if (std::getline(iss, token, '\t'))
+        has_touchpad = (std::stoi(token) != 0);
+    if (std::getline(iss, token, '\t'))
+        num_usb_ports = std::stoi(token);
+}
+
+void Laptop::write_raw(std::ostream &os) const {
+    PortableMachine::write_raw(os);
+    int touch = has_touchpad ? 1 : 0;
+    os.write(reinterpret_cast<const char *>(&touch), sizeof(touch));
+    os.write(reinterpret_cast<const char *>(&num_usb_ports), sizeof(num_usb_ports));
+}
+
+void Laptop::read_raw(std::istream &is) {
+    PortableMachine::read_raw(is);
+    int touch = 0;
+    is.read(reinterpret_cast<char *>(&touch), sizeof(touch));
+    has_touchpad = (touch != 0);
+    is.read(reinterpret_cast<char *>(&num_usb_ports), sizeof(num_usb_ports));
 }

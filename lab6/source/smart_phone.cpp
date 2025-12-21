@@ -1,6 +1,8 @@
 #include "../include/smart_phone.h"
 #include "../include/input_utils.h"
+#include "../include/serialization_utils.h"
 #include <iomanip>
+#include <sstream>
 
 void SmartPhone::print_header() const {
     PortableMachine::print_header();
@@ -80,4 +82,40 @@ std::istream &operator>>(std::istream &is, SmartPhone &phone) {
     std::cout << "Enter charging connector type:\t";
     phone.charging_connector_type = input_string_eng(is);
     return is;
+}
+
+std::string SmartPhone::text_header() const { return PortableMachine::text_header() + std::string("Has_camera\tCharging_adapter_type\t"); }
+
+void SmartPhone::to_text_row(std::ostream &os) const {
+    PortableMachine::to_text_row(os);
+    const char *conn = (charging_connector_type == "") ? "" : charging_connector_type.c_str();
+    os << (has_camera ? 1 : 0) << '\t' << conn << '\t';
+}
+
+void SmartPhone::from_text_row(const std::string &line) {
+    PortableMachine::from_text_row(line);
+    std::istringstream iss(line);
+    std::string token;
+    for (int i = 0; i < 5; ++i)
+        std::getline(iss, token, '\t');
+    if (std::getline(iss, token, '\t'))
+        has_camera = (std::stoi(token) != 0);
+    if (std::getline(iss, token, '\t'))
+        charging_connector_type = String(token.c_str());
+}
+
+void SmartPhone::write_raw(std::ostream &os) const {
+    PortableMachine::write_raw(os);
+    int cam = has_camera ? 1 : 0;
+    os.write(reinterpret_cast<const char *>(&cam), sizeof(cam));
+    write_string_raw(os, charging_connector_type.c_str());
+}
+
+void SmartPhone::read_raw(std::istream &is) {
+    PortableMachine::read_raw(is);
+    int cam = 0;
+    is.read(reinterpret_cast<char *>(&cam), sizeof(cam));
+    has_camera = (cam != 0);
+    std::string s = read_string_raw(is);
+    charging_connector_type = String(s.c_str());
 }

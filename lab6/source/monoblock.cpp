@@ -1,6 +1,8 @@
 #include "../include/monoblock.h"
 #include "../include/input_utils.h"
+#include "../include/serialization_utils.h"
 #include <iomanip>
+#include <sstream>
 
 void Monoblock::print_header() const {
     PersonalComputer::print_header();
@@ -78,4 +80,38 @@ std::istream &operator>>(std::istream &is, Monoblock &mono) {
     std::cout << "Enter screen size:\t";
     mono.screen_size = input_int(is, 1, 300);
     return is;
+}
+
+std::string Monoblock::text_header() const { return PersonalComputer::text_header() + std::string("Has_built_in_webcam\tScreen_size\t"); }
+
+void Monoblock::to_text_row(std::ostream &os) const {
+    PersonalComputer::to_text_row(os);
+    os << (has_built_in_webcam ? 1 : 0) << '\t' << screen_size << '\t';
+}
+
+void Monoblock::from_text_row(const std::string &line) {
+    PersonalComputer::from_text_row(line);
+    std::istringstream iss(line);
+    std::string token;
+    for (int i = 0; i < 5; ++i)
+        std::getline(iss, token, '\t');
+    if (std::getline(iss, token, '\t'))
+        has_built_in_webcam = (std::stoi(token) != 0);
+    if (std::getline(iss, token, '\t'))
+        screen_size = std::stoi(token);
+}
+
+void Monoblock::write_raw(std::ostream &os) const {
+    PersonalComputer::write_raw(os);
+    int wb = has_built_in_webcam ? 1 : 0;
+    os.write(reinterpret_cast<const char *>(&wb), sizeof(wb));
+    os.write(reinterpret_cast<const char *>(&screen_size), sizeof(screen_size));
+}
+
+void Monoblock::read_raw(std::istream &is) {
+    PersonalComputer::read_raw(is);
+    int wb = 0;
+    is.read(reinterpret_cast<char *>(&wb), sizeof(wb));
+    has_built_in_webcam = (wb != 0);
+    is.read(reinterpret_cast<char *>(&screen_size), sizeof(screen_size));
 }

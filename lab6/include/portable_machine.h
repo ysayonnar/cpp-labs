@@ -19,6 +19,13 @@ class PortableMachine : public ComputingMachine {
     String machine_type() const override;
     void edit() override;
 
+    std::string text_header() const override;
+    void to_text_row(std::ostream &os) const override;
+    void from_text_row(const std::string &line) override;
+
+    void write_raw(std::ostream &os) const override;
+    void read_raw(std::istream &is) override;
+
     int get_battery_capacity() const;
     String get_display_type() const;
 

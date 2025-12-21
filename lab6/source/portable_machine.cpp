@@ -1,6 +1,9 @@
 #include "../include/portable_machine.h"
 #include "../include/input_utils.h"
+#include "../include/serialization_utils.h"
+#include <cstdint>
 #include <iomanip>
+#include <sstream>
 
 void PortableMachine::print_header() const {
     ComputingMachine::print_header();
@@ -70,4 +73,42 @@ std::istream &operator>>(std::istream &is, PortableMachine &machine) {
     std::cout << "Enter display type:\t";
     machine.display_type = input_string_eng(is);
     return is;
+}
+
+std::string PortableMachine::text_header() const { return ComputingMachine::text_header() + std::string("Battery\tDisplay\t"); }
+
+void PortableMachine::to_text_row(std::ostream &os) const {
+    ComputingMachine::to_text_row(os);
+    const char *disp = (display_type == "") ? "" : display_type.c_str();
+    os << battery_capacity << '\t' << disp << '\t';
+}
+
+void PortableMachine::from_text_row(const std::string &line) {
+    // parse base first
+    ComputingMachine::from_text_row(line);
+    // we need to extract battery and display from the line; split by tabs
+    std::istringstream iss(line);
+    std::string token;
+    // skip type,cpu,os
+    std::getline(iss, token, '\t');
+    std::getline(iss, token, '\t');
+    std::getline(iss, token, '\t');
+    // battery
+    if (std::getline(iss, token, '\t'))
+        battery_capacity = std::stoi(token);
+    if (std::getline(iss, token, '\t'))
+        display_type = String(token.c_str());
+}
+
+void PortableMachine::write_raw(std::ostream &os) const {
+    ComputingMachine::write_raw(os);
+    os.write(reinterpret_cast<const char *>(&battery_capacity), sizeof(battery_capacity));
+    write_string_raw(os, display_type.c_str());
+}
+
+void PortableMachine::read_raw(std::istream &is) {
+    ComputingMachine::read_raw(is);
+    is.read(reinterpret_cast<char *>(&battery_capacity), sizeof(battery_capacity));
+    std::string s = read_string_raw(is);
+    display_type = String(s.c_str());
 }

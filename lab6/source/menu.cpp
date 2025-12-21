@@ -1,10 +1,119 @@
 #include "../include/menu.h"
+#include "../include/file.h"
 #include "../include/input_utils.h"
+#include <cerrno>
+#include <cstdint>
 #include <limits>
+#include <sstream>
+#include <sys/stat.h>
 
 void Menu::clearStdin() {
     std::cin.clear();
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+}
+
+template <typename T> void Menu::saveToText(LinkedList<T> &list) {
+    if (!list.head) {
+        std::cout << "List is empty. Nothing to save.\n";
+        return;
+    }
+    // ensure files directory exists
+    if (mkdir("files", 0755) != 0 && errno != EEXIST) {
+        std::cout << "Failed to create files directory\n";
+        return;
+    }
+    std::string type = list.head->value.machine_type().c_str();
+    std::string fname = std::string("files/") + type + std::string(".txt");
+    try {
+        File f(fname);
+        f.open(std::ios::out | std::ios::trunc);
+        f.file << list.head->value.text_header() << '\n';
+        for (ListNode<T> *cur = list.head; cur; cur = cur->next) {
+            cur->value.to_text_row(f.file);
+            f.file << '\n';
+        }
+        f.close();
+        std::cout << "Saved to " << fname << "\n";
+    } catch (const std::exception &e) {
+        std::cout << "Error saving file: " << e.what() << "\n";
+    }
+}
+
+template <typename T> void Menu::loadFromText(LinkedList<T> &list) {
+    if (!list.head) {
+        std::cout << "List is empty; cannot infer type to load.\n";
+        return;
+    }
+    std::string type = list.head->value.machine_type().c_str();
+    std::string fname = std::string("files/") + type + std::string(".txt");
+    try {
+        File f(fname);
+        f.open(std::ios::in);
+        std::string line;
+        // read header
+        std::getline(f.file, line);
+        while (std::getline(f.file, line)) {
+            if (line.empty())
+                continue;
+            T obj;
+            obj.from_text_row(line);
+            list.push_back(obj);
+        }
+        f.close();
+        std::cout << "Loaded from " << fname << "\n";
+    } catch (const std::exception &e) {
+        std::cout << "Error loading file: " << e.what() << "\n";
+    }
+}
+
+template <typename T> void Menu::saveToBinary(LinkedList<T> &list) {
+    if (!list.head) {
+        std::cout << "List is empty. Nothing to save.\n";
+        return;
+    }
+    if (mkdir("files", 0755) != 0 && errno != EEXIST) {
+        std::cout << "Failed to create files directory\n";
+        return;
+    }
+    std::string type = list.head->value.machine_type().c_str();
+    std::string fname = std::string("files/") + type;
+    try {
+        File f(fname);
+        f.open(std::ios::out | std::ios::binary | std::ios::trunc);
+        uint32_t count = (uint32_t)list.length;
+        f.file.write(reinterpret_cast<const char *>(&count), sizeof(count));
+        for (ListNode<T> *cur = list.head; cur; cur = cur->next) {
+            cur->value.write_raw(f.file);
+        }
+        f.close();
+        std::cout << "Saved binary to " << fname << "\n";
+    } catch (const std::exception &e) {
+        std::cout << "Error saving binary file: " << e.what() << "\n";
+    }
+}
+
+template <typename T> void Menu::loadFromBinary(LinkedList<T> &list) {
+    if (!list.head) {
+        std::cout << "List is empty; cannot infer type to load.\n";
+        return;
+    }
+    std::string type = list.head->value.machine_type().c_str();
+    std::string fname = std::string("files/") + type;
+    try {
+        File f(fname);
+        f.open(std::ios::in | std::ios::binary);
+        uint32_t count = 0;
+        f.file.read(reinterpret_cast<char *>(&count), sizeof(count));
+        for (uint32_t i = 0; i < count; ++i) {
+            T obj;
+            obj.read_raw(f.file);
+            list.push_back(obj);
+        }
+        f.close();
+        std::cout << "Loaded binary from " << fname << "\n";
+    } catch (const std::exception &e) {
+        std::cout << "Error loading binary file: " << e.what() << "\n";
+    }
 }
 
 void Menu::run() {
@@ -56,9 +165,13 @@ template <typename T> void Menu::familyMenu(LinkedList<T> &list, const std::stri
         std::cout << "4) Search devices\n";
         std::cout << "5) Print devices\n";
         std::cout << "6) Edit device by index\n";
+        std::cout << "7) Save to text file\n";
+        std::cout << "8) Load from text file\n";
+        std::cout << "9) Save to binary file\n";
+        std::cout << "10) Load from binary file\n";
         std::cout << "0) Back to main menu\n";
         std::cout << "Choice: ";
-        choice = input_int(std::cin, 0, 6);
+        choice = input_int(std::cin, 0, 10);
 
         switch (choice) {
         case 1:
@@ -78,6 +191,18 @@ template <typename T> void Menu::familyMenu(LinkedList<T> &list, const std::stri
             break;
         case 6:
             editDevice<T>(list);
+            break;
+        case 7:
+            saveToText<T>(list);
+            break;
+        case 8:
+            loadFromText<T>(list);
+            break;
+        case 9:
+            saveToBinary<T>(list);
+            break;
+        case 10:
+            loadFromBinary<T>(list);
             break;
         case 0:
             break;

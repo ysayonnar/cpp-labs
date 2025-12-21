@@ -28,6 +28,11 @@ class PersonalComputer : public ComputingMachine {
     PersonalComputer &operator=(const PersonalComputer &other);
     friend std::ostream &operator<<(std::ostream &os, const PersonalComputer &pc);
     friend std::istream &operator>>(std::istream &is, PersonalComputer &pc);
+    void to_text_row(std::ostream &os) const override;
+    void from_text_row(const std::string &line) override;
+    std::string text_header() const override;
+    void write_raw(std::ostream &os) const override;
+    void read_raw(std::istream &is) override;
 };
 
 #endif

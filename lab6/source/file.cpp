@@ -5,7 +5,7 @@ std::string File::get_filename() const { return filename; }
 
 void File::set_filename(const std::string &filename) { this->filename = filename; }
 
-void File::open(std::ios::openmode mode = std::ios::in | std::ios::out) {
+void File::open(std::ios::openmode mode) {
     close();
 
     file.open(filename, mode);

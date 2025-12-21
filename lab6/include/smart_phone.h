@@ -27,6 +27,11 @@ class SmartPhone : public PortableMachine {
     SmartPhone &operator=(const SmartPhone &other);
     friend std::ostream &operator<<(std::ostream &os, const SmartPhone &phone);
     friend std::istream &operator>>(std::istream &is, SmartPhone &phone);
+    void to_text_row(std::ostream &os) const override;
+    void from_text_row(const std::string &line) override;
+    std::string text_header() const override;
+    void write_raw(std::ostream &os) const override;
+    void read_raw(std::istream &is) override;
 };
 
 #endif

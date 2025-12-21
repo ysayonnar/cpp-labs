@@ -3,6 +3,8 @@
 
 #include "../../string/string.h"
 #include <iostream>
+#include <ostream>
+#include <string>
 
 class ComputingMachine {
   protected:
@@ -18,6 +20,14 @@ class ComputingMachine {
     virtual String machine_type() const = 0;
     virtual void print_header() const;
     virtual void edit() = 0;
+
+    // Text and binary serialization helpers
+    virtual std::string text_header() const;
+    virtual void to_text_row(std::ostream &os) const;
+    virtual void from_text_row(const std::string &line);
+
+    virtual void write_raw(std::ostream &os) const;
+    virtual void read_raw(std::istream &is);
 
     String get_cpu() const;
     String get_operating_system() const;

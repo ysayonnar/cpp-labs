@@ -1,6 +1,7 @@
 #ifndef MENU_H
 #define MENU_H
 
+#include "file.h"
 #include "laptop.h"
 #include "linked_list.hpp"
 #include "monoblock.h"
@@ -31,6 +32,10 @@ class Menu {
     template <typename T> void deleteDevice(LinkedList<T> &list);
     template <typename T> void sortDevices(LinkedList<T> &list);
     template <typename T> void searchDevices(LinkedList<T> &list);
+    template <typename T> void saveToText(LinkedList<T> &list);
+    template <typename T> void loadFromText(LinkedList<T> &list);
+    template <typename T> void saveToBinary(LinkedList<T> &list);
+    template <typename T> void loadFromBinary(LinkedList<T> &list);
     void clearStdin();
 };
 
