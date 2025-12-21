@@ -5,7 +5,7 @@
 #include <cstdint>
 #include <limits>
 #include <sstream>
-#include <sys/stat.h
+#include <sys/stat.h>
 
 void Menu::clearStdin() {
     std::cin.clear();
