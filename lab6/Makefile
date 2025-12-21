@@ -9,5 +9,6 @@ run:
 		../string/string.cpp \
 		./source/menu.cpp \
 		./source/input_utils.cpp \
+		./source/file.cpp \
 
 	./main 
