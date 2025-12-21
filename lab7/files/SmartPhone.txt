@@ -1,0 +1,4 @@
+Type	Processor	Operating_system	Battery	Display	Has_camera	Charging_adapter_type	
+SmartPhone	asd	asd	13	asd	1	ads	
+SmartPhone	appleSilicon	ios	4500	ips	1	typeC	
+SmartPhone	snapdragon	android	3400	ips	1	typeC	
