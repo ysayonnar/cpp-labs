@@ -10,6 +10,7 @@
 #include "smart_phone.h"
 #include <iostream>
 #include <string>
+#include <vector>
 
 class Menu {
   public:
@@ -24,18 +25,36 @@ class Menu {
     LinkedList<Monoblock> monoblocks;
     LinkedList<PortableMachine> portables;
     LinkedList<PersonalComputer> pcs;
+    // STL vector alternatives
+    std::vector<SmartPhone> smartphones_v;
+    std::vector<Laptop> laptops_v;
+    std::vector<Monoblock> monoblocks_v;
+    std::vector<PortableMachine> portables_v;
+    std::vector<PersonalComputer> pcs_v;
+    bool use_vector = false;
 
     template <typename T> void familyMenu(LinkedList<T> &list, const std::string &name);
+    template <typename T> void familyMenu(std::vector<T> &list, const std::string &name);
     template <typename T> void addDevice(LinkedList<T> &list);
+    template <typename T> void addDevice(std::vector<T> &list);
     template <typename T> void printDevices(LinkedList<T> &list);
+    template <typename T> void printDevices(std::vector<T> &list);
     template <typename T> void editDevice(LinkedList<T> &list);
+    template <typename T> void editDevice(std::vector<T> &list);
     template <typename T> void deleteDevice(LinkedList<T> &list);
+    template <typename T> void deleteDevice(std::vector<T> &list);
     template <typename T> void sortDevices(LinkedList<T> &list);
+    template <typename T> void sortDevices(std::vector<T> &list);
     template <typename T> void searchDevices(LinkedList<T> &list);
+    template <typename T> void searchDevices(std::vector<T> &list);
     template <typename T> void saveToText(LinkedList<T> &list);
+    template <typename T> void saveToText(std::vector<T> &list);
     template <typename T> void loadFromText(LinkedList<T> &list);
+    template <typename T> void loadFromText(std::vector<T> &list);
     template <typename T> void saveToBinary(LinkedList<T> &list);
+    template <typename T> void saveToBinary(std::vector<T> &list);
     template <typename T> void loadFromBinary(LinkedList<T> &list);
+    template <typename T> void loadFromBinary(std::vector<T> &list);
     void clearStdin();
 };
 
